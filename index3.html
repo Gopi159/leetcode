@@ -1,0 +1,109 @@
+<!-- Algorithm -->
+<!-- 
+  - create a method having two parameters as String 
+  - convert both parameters to array using spread opereator
+  - reverse both arrays using reverse() and store each array in new variable
+  - find the max length of two arrays and store in a variable
+  - assign max length array to variable and use the following for both conditions
+  - create a for loop to iterate the both arrays untill the length of the greater array
+  - if there is any undefined value in the min array then replace that with 0
+  - declare carry variable to check while adding two array value,whether value is greater than 9 store 1 in carry else carry is 0
+  - also check our carry variable is equal to 0 
+  - if it is 0 then add both array values
+  - then push the added value into new array
+  - if not then add both array value with carry value
+  - then subtract added value with 10 and push the value to new array
+  - handle two cases array values
+  - if only one array value for both arrays,so check max array length is > than 1
+  - if it is then we can do as mentioned above else then just push the added value to the new array
+  - second case,if both arrays values were undefined when  carry is 1 ,then add some conditions
+  - if both next array value is undefined then just push the added value to new array
+  - else do as mentioned above carry forward procedure 
+  - get our new array elements with rest operator and again use reverse() and use join()
+  - return our final array as a result  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  var i, c;
+
+  var carry = 0;
+  function add(num1, num2) {
+    var s = [];
+    var a = [...num1].reverse();
+
+    var b = [...num2].reverse();
+
+    if (a.length >= b.length) {
+      var greater = a;
+
+      for (var i = 0; i < greater.length; i++) {
+        if (b[i] === undefined) {
+          b[i] = "0";
+        }
+        if (carry === 0) {
+          var c = parseInt(a[i]) + parseInt(b[i]);
+        } else {
+          var c = parseInt(a[i]) + parseInt(b[i]) + carry;
+        }
+        if (greater.length > 1) {
+          if (c <= 9) {
+            carry = 0;
+            s.push(c);
+          } else {
+            if (a[i + 1] === undefined && b[i + 1] === undefined) {
+              carry = 0;
+              s.push(c);
+            } else {
+              carry = 1;
+              s.push(c - 10);
+            }
+          }
+        } else {
+          s.push(c);
+        }
+      }
+      return [...s].reverse().join("").toString();
+    } else {
+      var greater = b;
+
+      for (var i = 0; i < greater.length; i++) {
+        if (a[i] === undefined) {
+          a[i] = "0";
+        }
+        if (carry === 0) {
+          var c = parseInt(a[i]) + parseInt(b[i]);
+        } else {
+          var c = parseInt(a[i]) + parseInt(b[i]) + carry;
+        }
+        if (greater.length > 1) {
+          if (c <= 9) {
+            carry = 0;
+            s.push(c);
+          } else {
+            if (a[i + 1] === undefined && b[i + 1] === undefined) {
+              carry = 0;
+              s.push(c);
+            } else {
+              carry = 1;
+              s.push(c - 10);
+            }
+          }
+        } else {
+          s.push(c);
+        }
+      }
+      return [...s].reverse().join("").toString();
+    }
+  }
+
+  console.log(add("98", "9"));
+</script>
